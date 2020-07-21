@@ -11,6 +11,9 @@ like.
 Warning: Work in Progress.
 
 
+![Screenshot](https://raw.githubusercontent.com/wandersoncferreira/alabaster-theme/master/screenshot.png)
+
+
 # Reading Resources
 
 1. [Syntax highlighting is a waste of an information channel](https://buttondown.email/hillelwayne/archive/syntax-highlighting-is-a-waste-of-an-information/)
