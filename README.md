@@ -39,7 +39,7 @@ Additionally:
 - Alabaster only highlights things that parser could identify reliably. I believe that if highlighting works only partially then it does more harm than good. When highlighting works reliably, your brain learns to rely on it. When it’s not reliable, your brain spends precious brain cycles to re-check everything it sees on the screen.
 
 <p align="center">
-  <img width="460" height="300" src="https://raw.githubusercontent.com/wandersoncferreira/alabaster-theme/master/screenshot.png">
+  <img src="https://raw.githubusercontent.com/wandersoncferreira/alabaster-theme/master/screenshot.png">
 </p>
 
 # Reading Resources
