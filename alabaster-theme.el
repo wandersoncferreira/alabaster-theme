@@ -48,7 +48,8 @@ The theme needs to be reloaded after changing anything in this group."
       (alabaster-keywords  "#7A3E9D")
       (alabaster-fn-names  "#325CC0")
       (alabaster-punctuation "#777777")
-      
+      (alabaster-paren-match "#777777")
+      (alabaster-paren-match-bg "gray85")
       (alabaster-line-hl   "#F0F0F0")
       (alabaster-hl        "#FFE9A6")
       (alabaster-region    "#E0E0E0")
@@ -73,6 +74,7 @@ The theme needs to be reloaded after changing anything in this group."
    `(error ((,class (:foreground ,alabaster-red))))
    `(warning ((,class (:foreground ,alabaster-red))))
    `(success ((,class (:foreground ,alabaster-green))))
+   `(bold ((,class (:foreground ,alabaster-punctuation))))
 
    `(font-lock-builtin-face ((,class (:foreground ,alabaster-fn-names))))
    `(font-lock-comment-face ((,class (:foreground ,alabaster-comments))))
@@ -82,6 +84,8 @@ The theme needs to be reloaded after changing anything in this group."
    `(font-lock-string-face ((t (:foreground ,alabaster-strings))) t)
    `(font-lock-type-face ((t (:foreground ,alabaster-fn-names))))
    `(font-lock-variable-name-face ((,class (:foreground ,alabaster-fn-names))))
+   `(font-lock-regexp-grouping-backslash ((,class :foreground ,alabaster-punctuation)))
+   `(font-lock-regexp-grouping-construct ((,class :foreground ,alabaster-punctuation)))
    `(font-lock-warning-face ((,class (:foreground ,alabaster-red))))
    `(font-lock-numbers ((,class (:foreground ,alabaster-keywords))))
    `(font-lock-punctuation ((,class (:foreground ,alabaster-punctuation))))
@@ -120,15 +124,20 @@ The theme needs to be reloaded after changing anything in this group."
    ;; org mode
    `(org-todo ((,class (:foreground ,alabaster-red))))
    `(org-done ((,class (:foreground ,alabaster-green))))
-   
-   ))
+
+   ;; parenthesis
+   `(show-paren-match ((,class (:foreground ,alabaster-paren-match :background ,alabaster-paren-match-bg))))
+   `(show-paren-mismatch ((,class (:background ,alabaster-black))))))
 
 (defun alabaster-font-rules ()
   "Enforce some font-lock-rules after initializing."
-  (font-lock-add-keywords nil
-                          '(("^[0-9]+" . 'font-lock-numbers)
-                            ("^#" . 'font-lock-punctuation)
-                            )))
+  
+  ;; matching punctuation
+  (font-lock-add-keywords nil '(("\\([\](){}<>''#\[]\\)" 1 'font-lock-punctuation t)))
+  (font-lock-add-keywords nil '(("\\(\"\\)" 1 'font-lock-punctuation t)))
+  
+  ;; match numbers
+  (font-lock-add-keywords nil '(("\\([0-9]+\\)" 1 'font-lock-numbers t))))
 
 (add-hook 'prog-mode-hook 'alabaster-font-rules)
 
