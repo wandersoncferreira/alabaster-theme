@@ -126,7 +126,7 @@ The theme needs to be reloaded after changing anything in this group."
 (defun alabaster-font-rules ()
   "Enforce some font-lock-rules after initializing."
   (font-lock-add-keywords nil
-                          '(("[0-9]+" . 'font-lock-numbers)
+                          '(("^[0-9]+" . 'font-lock-numbers)
                             ("^#" . 'font-lock-punctuation)
                             )))
 
