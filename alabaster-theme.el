@@ -39,6 +39,8 @@ The theme needs to be reloaded after changing anything in this group."
 
 (make-face 'font-lock-numbers)
 (make-face 'font-lock-punctuation)
+(make-face 'font-clojure-fix-black)
+(make-face 'font-clojure-fix-purple)
 
 (let ((class '((class color) (min-colors 89)))
       (alabaster-fg        "#000")
@@ -80,7 +82,7 @@ The theme needs to be reloaded after changing anything in this group."
    `(font-lock-comment-face ((,class (:foreground ,alabaster-comments))))
    `(font-lock-constant-face ((,class (:foreground ,alabaster-keywords))))
    `(font-lock-function-name-face ((,class (:foreground ,alabaster-fn-names))))
-   `(font-lock-keyword-face ((,class (:foreground ,alabaster-black))))
+   `(font-lock-keyword-face ((,class (:foreground ,alabaster-fn-names))))
    `(font-lock-string-face ((t (:foreground ,alabaster-strings))) t)
    `(font-lock-type-face ((t (:foreground ,alabaster-fn-names))))
    `(font-lock-variable-name-face ((,class (:foreground ,alabaster-fn-names))))
@@ -97,6 +99,8 @@ The theme needs to be reloaded after changing anything in this group."
    `(cider-instrumented-face ((,class (:foreground ,alabaster-black))))
    `(cider-traced-face ((,class (:foreground ,alabaster-black))))
    `(cider-reader-conditional-face ((,class (:foreground ,alabaster-black))))
+   `(font-clojure-fix-black ((,class (:foreground ,alabaster-black))))
+   `(font-clojure-fix-purple ((,class (:foreground ,alabaster-keywords))))
 
    ;; diff highlight
    `(diff-hl-insert ((,class (:background ,alabaster-green))))
@@ -131,13 +135,17 @@ The theme needs to be reloaded after changing anything in this group."
 
 (defun alabaster-font-rules ()
   "Enforce some font-lock-rules after initializing."
-  
+
   ;; matching punctuation
   (font-lock-add-keywords nil '(("\\([\](){}''#\[]\\)" 1 'font-lock-punctuation t)))
-  (font-lock-add-keywords nil '(("[^-]\\(>\\)\\|\\s-\\(<\\)" 1 'font-lock-punctuation t)))
-  (font-lock-add-keywords nil '(("[^-]\\(>\\)\\|\\s-\\(<\\)" 2 'font-lock-punctuation t)))
   (font-lock-add-keywords nil '(("\\(\"\\)" 1 'font-lock-punctuation t)))
-  
+
+  ;; fix colors in clj mode
+  (font-lock-add-keywords nil '(("(\\(\\(?:\\w+[_-]?\\)+\\w+[?\\*\\!]?\\)" 1 'font-lock-keyword-face)))
+  (font-lock-add-keywords nil '(("\\((\\(ns\\)\\s-\\)" 2 'font-clojure-fix-black)))
+  (font-lock-add-keywords nil '(("\\(defn\\|def\\|let\\|if\\|recur\\|loop\\)" 1 'font-clojure-fix-black t)))
+  (font-lock-add-keywords nil '(("\\(:require\\|:as\\|:refer\\|refer-clojure\|:all\\)" 1 'font-clojure-fix-purple)))
+    
   ;; match numbers
   (font-lock-add-keywords nil '(("\\([0-9]+\\)" 1 'font-lock-numbers t))))
 
