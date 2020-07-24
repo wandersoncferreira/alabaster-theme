@@ -133,7 +133,9 @@ The theme needs to be reloaded after changing anything in this group."
   "Enforce some font-lock-rules after initializing."
   
   ;; matching punctuation
-  (font-lock-add-keywords nil '(("\\([\](){}<>''#\[]\\)" 1 'font-lock-punctuation t)))
+  (font-lock-add-keywords nil '(("\\([\](){}''#\[]\\)" 1 'font-lock-punctuation t)))
+  (font-lock-add-keywords nil '(("[^-]\\(>\\)\\|\\s-\\(<\\)" 1 'font-lock-punctuation t)))
+  (font-lock-add-keywords nil '(("[^-]\\(>\\)\\|\\s-\\(<\\)" 2 'font-lock-punctuation t)))
   (font-lock-add-keywords nil '(("\\(\"\\)" 1 'font-lock-punctuation t)))
   
   ;; match numbers
@@ -152,3 +154,10 @@ The theme needs to be reloaded after changing anything in this group."
 
 (provide-theme 'alabaster)
 ;;; alabaster-theme.el ends here
+
+
+
+
+
+
+
