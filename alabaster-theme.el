@@ -144,16 +144,9 @@ The theme needs to be reloaded after changing anything in this group."
   (font-lock-add-keywords nil '(("(\\(\\(?:\\w+[_-]?\\)+\\w+[?\\*\\!]?\\)" 1 'font-lock-keyword-face)))
   (font-lock-add-keywords nil '(("\\((\\(ns\\)\\s-\\)" 2 'font-clojure-fix-black)))
   (font-lock-add-keywords nil '(("\\(defn\\|def\\|let\\|if\\|recur\\|loop\\)" 1 'font-clojure-fix-black t)))
-  (font-lock-add-keywords nil '(("\\(:require\\|:as\\|:refer\\|refer-clojure\|:all\\)" 1 'font-clojure-fix-purple)))
-    
-  ;; match numbers
-  (font-lock-add-keywords nil '(("\\([0-9]+\\)" 1 'font-lock-numbers t))))
+  (font-lock-add-keywords nil '(("\\(:require\\|:as\\|:refer\\|refer-clojure\|:all\\)" 1 'font-clojure-fix-purple))))
 
 (add-hook 'prog-mode-hook 'alabaster-font-rules)
-
-(with-eval-after-load 'cider
-  (setq cider-font-lock-dynamically nil
-        cider-font-lock-reader-conditionals nil))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)
