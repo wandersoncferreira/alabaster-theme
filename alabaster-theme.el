@@ -142,8 +142,7 @@ The theme needs to be reloaded after changing anything in this group."
 
   ;; fix colors in clj mode
   (font-lock-add-keywords nil '(("(\\(\\(?:\\w+[_-]?\\)+\\w+[?\\*\\!]?\\)" 1 'font-lock-keyword-face)))
-  (font-lock-add-keywords nil '(("\\((\\(ns\\)\\s-\\)" 2 'font-clojure-fix-black)))
-  (font-lock-add-keywords nil '(("\\(defn\\|def\\|let\\|if\\|recur\\|loop\\)" 1 'font-clojure-fix-black t)))
+  (font-lock-add-keywords nil '(("\\((\\(ns\\|let\\|if\\|def\\|defn\\|recur\\|loop\\)\\s-\\)" 2 'font-clojure-fix-black)))
   (font-lock-add-keywords nil '(("\\(:require\\|:as\\|:refer\\|refer-clojure\|:all\\)" 1 'font-clojure-fix-purple))))
 
 (add-hook 'prog-mode-hook 'alabaster-font-rules)
