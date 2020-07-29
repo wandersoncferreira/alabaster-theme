@@ -133,17 +133,33 @@ The theme needs to be reloaded after changing anything in this group."
    `(show-paren-match ((,class (:foreground ,alabaster-paren-match :background ,alabaster-paren-match-bg))))
    `(show-paren-mismatch ((,class (:background ,alabaster-black))))))
 
+(defvar alabaster--custom-tokens
+  '("ns" "defn" "def" "defmulti"
+    "defmethod" "let" "if" "defonce"
+    "defn-" "recur" "loop" "defun"
+    "defvar" "deftheme" "defcustom"
+    "defgroup"))
+
+(defun alabaster--custom-tokens-fmt ()
+  "Format the regexp to colorize the custom tokens defined above."
+  (let ((result (car alabaster--custom-tokens)))
+    (dolist (token (cdr alabaster--custom-tokens))
+      (setq result (format "%s\\|%s" result token)))
+    (format "\\((\\(%s\\)\\s-\\)" result)))
+
 (defun alabaster-font-rules ()
   "Enforce some font-lock-rules after initializing."
 
-  ;; matching punctuation
-  (font-lock-add-keywords nil '(("\\([\](){}''#\[]\\)" 1 'font-lock-punctuation t)))
-  (font-lock-add-keywords nil '(("\\(\"\\)" 1 'font-lock-punctuation t)))
+  (let ((alabaster--custom-tokens-regexp (alabaster--custom-tokens-fmt)))
+    
+    ;; matching punctuation
+    (font-lock-add-keywords nil '(("\\([\](){}''#\[]\\)" 1 'font-lock-punctuation t)))
+    (font-lock-add-keywords nil '(("\\(\"\\)" 1 'font-lock-punctuation t)))
 
-  ;; fix colors in clj mode
-  (font-lock-add-keywords nil '(("(\\(\\(?:\\w+[_-]?\\)+\\w+[?\\*\\!]?\\)" 1 'font-lock-keyword-face)))
-  (font-lock-add-keywords nil '(("\\((\\(ns\\|let\\|if\\|def\\|defn\\|recur\\|loop\\)\\s-\\)" 2 'font-clojure-fix-black)))
-  (font-lock-add-keywords nil '(("\\(:require\\|:as\\|:refer\\|refer-clojure\|:all\\)" 1 'font-clojure-fix-purple))))
+    ;; fix colors in clj mode
+    (font-lock-add-keywords nil '(("(\\(\\(?:\\w+[_-]?\\)+\\w+[?\\*\\!]?\\)" 1 'font-lock-keyword-face)))
+    (font-lock-add-keywords nil `((,alabaster--custom-tokens-regexp 2 'font-clojure-fix-black)))
+    (font-lock-add-keywords nil '(("\\(:require\\|:as\\|:refer\\|refer-clojure\|:all\\)" 1 'font-clojure-fix-purple)))))
 
 (add-hook 'prog-mode-hook 'alabaster-font-rules)
 
