@@ -105,6 +105,11 @@ want to change the symbols of modifications in my buffer to the right side.
 (global-git-gutter-mode +1)
 ```
 
+### Global highlight line
+
+```elisp
+(global-hl-line-mode +1)
+```
 
 # Reading Resources
 

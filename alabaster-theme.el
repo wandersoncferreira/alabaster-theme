@@ -149,9 +149,7 @@ The theme needs to be reloaded after changing anything in this group."
 
 (defun alabaster-font-rules ()
   "Enforce some font-lock-rules after initializing."
-
   (let ((alabaster--custom-tokens-regexp (alabaster--custom-tokens-fmt)))
-    
     ;; matching punctuation
     (font-lock-add-keywords nil '(("\\([\](){}''#\[]\\)" 1 'font-lock-punctuation t)))
     (font-lock-add-keywords nil '(("\\(\"\\)" 1 'font-lock-punctuation t)))
@@ -170,10 +168,3 @@ The theme needs to be reloaded after changing anything in this group."
 
 (provide-theme 'alabaster)
 ;;; alabaster-theme.el ends here
-
-
-
-
-
-
-
