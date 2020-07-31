@@ -1,6 +1,5 @@
 # Emacs implementation of Alabaster Theme
 
-
 I am slowly crafting my own version of Alabaster theme originally written by
 [@tonsky](https://github.com/tonsky/vscode-theme-alabaster).
 

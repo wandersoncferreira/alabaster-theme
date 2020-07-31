@@ -140,16 +140,21 @@ The theme needs to be reloaded after changing anything in this group."
     "defvar" "deftheme" "defcustom"
     "defgroup"))
 
-(defun alabaster--custom-tokens-fmt ()
-  "Format the regexp to colorize the custom tokens defined above."
-  (let ((result (car alabaster--custom-tokens)))
-    (dolist (token (cdr alabaster--custom-tokens))
+(defvar alabaster--purple-tokens
+  '(":require" ":as" ":refer" ":refer-clojure"
+    ":all"))
+
+(defun alabaster--custom-tokens-fmt (tokens)
+  "Format the regexp to colorize the custom TOKENS defined above."
+  (let ((result (car tokens)))
+    (dolist (token (cdr tokens))
       (setq result (format "%s\\|%s" result token)))
     (format "\\((\\(%s\\)\\s-\\)" result)))
 
 (defun alabaster-font-rules ()
   "Enforce some font-lock-rules after initializing."
-  (let ((alabaster--custom-tokens-regexp (alabaster--custom-tokens-fmt)))
+  (let ((alabaster--custom-tokens-regexp (alabaster--custom-tokens-fmt alabaster--custom-tokens))
+        (alabaster--purple-tokens-regexp (alabaster--custom-tokens-fmt alabaster--purple-tokens)))
     ;; matching punctuation
     (font-lock-add-keywords nil '(("\\([\](){}''#\[]\\)" 1 'font-lock-punctuation t)))
     (font-lock-add-keywords nil '(("\\(\"\\)" 1 'font-lock-punctuation t)))
@@ -157,7 +162,7 @@ The theme needs to be reloaded after changing anything in this group."
     ;; fix colors in clj mode
     (font-lock-add-keywords nil '(("(\\(\\(?:\\w+[_-]?\\)+\\w+[?\\*\\!]?\\)" 1 'font-lock-keyword-face)))
     (font-lock-add-keywords nil `((,alabaster--custom-tokens-regexp 2 'font-clojure-fix-black)))
-    (font-lock-add-keywords nil '(("\\(:require\\|:as\\|:refer\\|refer-clojure\|:all\\)" 1 'font-clojure-fix-purple)))))
+    (font-lock-add-keywords nil `((,alabaster--purple-tokens-regexp 2 'font-clojure-fix-purple)))))
 
 (add-hook 'prog-mode-hook 'alabaster-font-rules)
 
