@@ -125,6 +125,9 @@ The theme needs to be reloaded after changing anything in this group."
    `(isearch ((,class (:background ,alabaster-hl :inverse-video nil))))
    `(secondary-selection ((,class (:background ,alabaster-hl))))
 
+   ;; lsp ui
+   `(lsp-ui-sideline-code-action ((,class (:foreground ,alabaster-red))))
+
    ;; org mode
    `(org-todo ((,class (:foreground ,alabaster-red))))
    `(org-done ((,class (:foreground ,alabaster-green))))
